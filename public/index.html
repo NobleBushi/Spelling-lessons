@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spelling Lessons</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-card">
+          <p class="eyebrow">Local voice practice</p>
+          <h1>Spelling Lessons</h1>
+          <p class="sidebar-copy">
+            Type a word or phrase, hear it spoken locally, and get quick feedback on spelling and grammar.
+          </p>
+        </div>
+
+        <section class="panel options-panel">
+          <div class="panel-header">
+            <h2>Options</h2>
+          </div>
+          <label class="toggle-row" for="conversationToggle">
+            <span>
+              <span class="field-label compact-label">Conversation Mode</span>
+              <span class="panel-note" id="modeDescription">Off. The app reads exactly what was entered and scores the phrase.</span>
+            </span>
+            <span class="toggle-switch-wrap">
+              <input id="conversationToggle" class="toggle-input" type="checkbox" />
+              <span class="toggle-switch" aria-hidden="true"></span>
+            </span>
+          </label>
+          <label class="field-label" for="voiceSelect">Local voice</label>
+          <select id="voiceSelect" class="select-input"></select>
+          <label class="field-label" for="rateInput">Speech rate</label>
+          <input id="rateInput" type="range" min="0.7" max="1.2" value="0.92" step="0.01" />
+          <p class="panel-note">
+            Uses the browser's local speech engine. Robotic or compact voices usually fit the look better.
+          </p>
+        </section>
+
+        <section class="panel checker-panel">
+          <div class="panel-header">
+            <h2>Checker</h2>
+            <span id="modelStatusBadge" class="status-badge status-loading">Loading…</span>
+          </div>
+          <p id="modelStatusDetail" class="panel-note">
+            Preparing the local grammar checker.
+          </p>
+          <button id="retryModelButton" class="ghost-button status-button" type="button" hidden>
+            Retry model load
+          </button>
+        </section>
+      </aside>
+
+      <main class="chat-shell">
+        <header class="chat-header">
+          <div>
+            <p class="eyebrow">Practice feed</p>
+            <h2>Spell it. Hear it. Replay it.</h2>
+          </div>
+          <button id="clearHistoryButton" class="ghost-button">Clear history</button>
+        </header>
+
+        <section id="historyList" class="history-list" aria-live="polite"></section>
+
+        <form id="entryForm" class="composer">
+          <label class="sr-only" for="phraseInput">Type a word or phrase</label>
+          <textarea
+            id="phraseInput"
+            class="composer-input"
+            rows="3"
+            placeholder="Type a word or short phrase and press Enter"
+          ></textarea>
+          <div class="composer-actions">
+            <p class="composer-hint">Enter to submit. Shift+Enter for a new line.</p>
+            <button type="submit" class="primary-button">Speak</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <template id="historyItemTemplate">
+      <article class="history-item">
+        <div class="history-topline">
+          <div class="history-meta">
+            <div class="rating-pill">
+              <span class="rating-dot"></span>
+              <span class="rating-label"></span>
+            </div>
+            <span class="history-time"></span>
+          </div>
+          <div class="history-actions">
+            <button class="action-button icon-button replay-button" title="Replay" aria-label="Replay">
+              ▶
+            </button>
+            <button class="action-button icon-button copy-button" title="Copy to edit" aria-label="Copy to edit">
+              ⎘
+            </button>
+            <button class="action-button icon-button delete-button" title="Trash" aria-label="Trash">
+              🗑
+            </button>
+          </div>
+        </div>
+        <p class="history-text"></p>
+        <p class="history-feedback"></p>
+      </article>
+    </template>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

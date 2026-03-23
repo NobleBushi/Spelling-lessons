@@ -1,0 +1,9 @@
+{
+  "name": "spelling-lessons",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first spelling and TTS practice app",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
